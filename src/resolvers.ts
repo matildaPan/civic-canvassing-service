@@ -28,7 +28,14 @@ export const resolvers = {
     },
 
     removeHousehold: async (_: any, { id }: { id: string }) => {
-      await prisma.response.delete({ where: { householdId: id } });
+      const existingResponse = await prisma.response.findUnique({
+        where: { householdId: id },
+      });
+
+      // only delete response when it associates with household
+      if (existingResponse) {
+        await prisma.response.delete({ where: { householdId: id } });
+      }
       await prisma.household.delete({ where: { id } });
       pubsub.publish("HOUSEHOLD_UPDATED", { householdUpdated: null });
       return true;
