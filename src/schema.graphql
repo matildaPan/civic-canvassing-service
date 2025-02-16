@@ -1,0 +1,39 @@
+scalar JSON
+
+type User {
+  id: ID!
+  email: String!
+  role: Role!
+}
+
+enum Role {
+  VOLUNTEER
+  ADMIN
+}
+
+type Household {
+  id: ID!
+  address: String!
+  completed: Boolean!
+}
+
+type Response {
+  id: ID!
+  householdId: ID!
+  answers: JSON!
+}
+
+type Query {
+  getHouseholds: [Household!]!
+  getResponses(householdId: ID!): Response
+}
+
+type Mutation {
+  addHousehold(address: String!): Household
+  removeHousehold(id: ID!): Boolean
+  submitResponse(householdId: ID!, answers: JSON!): Response
+}
+
+type Subscription {
+  householdUpdated: Household!
+}
