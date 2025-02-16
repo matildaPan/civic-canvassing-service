@@ -12,7 +12,12 @@ export const resolvers = {
     getHouseholds: async () =>
       await prisma.household.findMany({ where: { completed: false } }),
     getResponses: async (_: any, { householdId }: { householdId: string }) =>
-      await prisma.response.findUnique({ where: { householdId } }),
+      await prisma.response.findUnique({
+        where: { householdId },
+        include: {
+          household: true,
+        },
+      }),
   },
 
   Mutation: {

@@ -21,6 +21,7 @@ type Response {
   id: ID!
   householdId: ID!
   answers: JSON!
+  household: Household
 }
 
 type Query {
