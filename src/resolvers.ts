@@ -9,7 +9,8 @@ export const resolvers = {
   JSON: GraphQLJSON,
 
   Query: {
-    getHouseholds: async () => await prisma.household.findMany(),
+    getHouseholds: async () =>
+      await prisma.household.findMany({ where: { completed: false } }),
     getResponses: async (_: any, { householdId }: { householdId: string }) =>
       await prisma.response.findUnique({ where: { householdId } }),
   },
@@ -22,6 +23,7 @@ export const resolvers = {
     },
 
     removeHousehold: async (_: any, { id }: { id: string }) => {
+      await prisma.response.delete({ where: { householdId: id } });
       await prisma.household.delete({ where: { id } });
       pubsub.publish("HOUSEHOLD_UPDATED", { householdUpdated: null });
       return true;
