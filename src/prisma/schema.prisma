@@ -29,7 +29,7 @@ model Household {
   id        String  @id @default(uuid())
   address   String  @unique
   completed Boolean @default(false)
-  responses Response[]
+  responses Response? // One-to-One relationship
 }
 
 model Response {
