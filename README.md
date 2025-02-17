@@ -4,6 +4,15 @@ This is a **GraphQL-based civic canvassing service** built as part of a Murmurat
 
 ---
 
+## **📌 First of all: Intall dependencies**
+
+Install all dependencies
+
+```sh
+nvm use
+npm install
+```
+
 ## **📌 Step 1: Set Up PostgreSQL Database**
 
 You need a **PostgreSQL** database running locally.
@@ -19,7 +28,7 @@ You need a **PostgreSQL** database running locally.
 If you prefer **Docker**, run:
 
 ```sh
-docker run --name postgres-container -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=secret -e POSTGRES_DB=canvassing_db -p 5432:5432 -d postgres
+docker run --name postgres-container -e POSTGRES_USER=[your-db-username] -e POSTGRES_PASSWORD=[your-db-password] -e POSTGRES_DB=canvassing_db -p 5432:5432 -d postgres
 ```
 
 ---
